@@ -1,8 +1,5 @@
 'use strict';
 
-const write = require('write');
-const path = require('path');
-
 class WildcardServerWebpackPlugin {
 	constructor(options) {
 		this.options = options;
@@ -11,12 +8,15 @@ class WildcardServerWebpackPlugin {
 	apply(compiler) {
 		const _this = this;
 
-		compiler.plugin('done', function() {
-			const filePath = path.join(
-				'./dist',
-				'server.js'
-			);
-			write.sync(filePath, 'helo world');
+		const content = 'hello world';
+
+		compiler.plugin('emit', function(compilation, callback) {
+			compilation.assets['server.js'] = {
+				source: content,
+				size: content.length
+			};
+
+			callback();
 		});
 	}
 }
