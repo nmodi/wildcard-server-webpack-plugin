@@ -12,8 +12,12 @@ class WildcardServerWebpackPlugin {
 
 		compiler.plugin('emit', function(compilation, callback) {
 			compilation.assets['server.js'] = {
-				source: content,
-				size: content.length
+				source: function() {
+					return content;
+				},
+				size: function() {
+					return content.length;
+				}
 			};
 
 			callback();
