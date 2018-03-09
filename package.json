@@ -11,16 +11,13 @@
     "url": "git+https://github.com/nmodi/wildcard-server-webpack-plugin.git"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/nmodi/wildcard-server-webpack-plugin/issues"
   },
   "homepage": "https://github.com/nmodi/wildcard-server-webpack-plugin#readme",
   "peerDependencies": {
-    "webpack": "^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0"
-  },
-  "dependencies": {
-    "fs": "^0.0.1-security",
-    "path": "^0.12.7"
+    "webpack": "^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0",
+    "express": "^1.0.0 || ^2.0.0 || ^3.0.0 || ^4.0.0"
   }
 }
