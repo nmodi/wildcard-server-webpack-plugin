@@ -1,6 +1,6 @@
 {
   "name": "wildcard-server-webpack-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Generates a server which serves index.html to all routes so you can focus on just your front end code.",
   "main": "index.js",
   "scripts": {
