@@ -1,18 +1,22 @@
 'use strict';
 
 class WildcardServerWebpackPlugin {
+    constructor({outputFolder}) {
+        this.outputFolder = outputFolder; 
+    }
+
 	apply(compiler) {
-		const outputPath = compiler.options.output.path ? compiler.options.output.path : 'dist';
+		const outputFolder = this.outputFolder ? this.outputFolder : 'dist';
 
 		const content = `const express = require('express')
 const path = require('path')
 const port = process.env.PORT || 8080
 const app  = express()
 
-app.use(express.static(__dirname + '/${outputPath}'))
+app.use(express.static(__dirname + '/${outputFolder}'))
 
 app.get('*', function (request, response){
-    response.sendFile(path.resolve(__dirname, '${outputPath}', 'index.html'))
+    response.sendFile(path.resolve(__dirname, '${outputFolder}', 'index.html'))
 })
 
 app.listen(port)
