@@ -1,8 +1,6 @@
 'use strict';
 
-class WildcardServerWebpackPlugin {
-	apply(compiler) {
-		const content = `const express = require('express')
+const content = `const express = require('express')
 const path = require('path')
 const port = process.env.PORT || 8080
 const app  = express()
@@ -16,6 +14,8 @@ app.get('*', function (request, response){
 app.listen(port)
 console.log("Server started on port " + port)`;
 
+class WildcardServerWebpackPlugin {
+	apply(compiler) {
 		compiler.plugin('emit', function(compilation, callback) {
 			compilation.assets['server.js'] = {
 				source: () => content,
