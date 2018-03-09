@@ -1,27 +1,22 @@
 'use strict';
 
 class WildcardServerWebpackPlugin {
-	constructor(options) {
-		this.portNumber = options.portNumber ? options.portNumber : 3000;
-	}
-
 	apply(compiler) {
-		const portNumber = this.portNumber;
-		const { outputPath } = compiler;
+		const outputPath = compiler.options.output.path ? compiler.options.output.path : 'dist';
 
-		const content = `var express = require('express');
+		const content = `const express = require('express')
+const path = require('path')
+const port = process.env.PORT || 8080
+const app  = express()
 
-var server = express();
-server.use('/${outputPath}', express.static(__dirname + '/${outputPath}'));
+app.use(express.static(__dirname + '/${outputPath}'))
 
-server.get('/*', function(req, res) {
-    res.sendFile(__dirname + '/index.html');
-});
+app.get('*', function (request, response){
+    response.sendFile(path.resolve(__dirname, '${outputPath}', 'index.html'))
+})
 
-var port = ${portNumber};
-server.listen(port, function() {
-    console.log('Server listening on port ' + ${portNumber});
-});`;
+app.listen(port)
+console.log("Server started on port " + port)`;
 
 		compiler.plugin('emit', function(compilation, callback) {
 			compilation.assets['server.js'] = {
